@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width; initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Taiwan Time to Greece Time Converter -- TimeBie</title>
+<meta name="keywords" content="Taiwan Time Greece Chart Conversion Calculator Converter Difference Timezone">
+<meta name="description" content="Taiwan Time and Greece Time Converter Calculator, Taiwan Time and Greece Time Conversion Table.">
+</head>
+
+<body>
+
+<div class="emain">
+<div class="esidebar">
+<script type="text/javascript">roffset1=8;</script><script type="text/javascript">roffset2=3;</script>
+<div class="sboxed" style="margin-top:1px;">
+<TABLE cellSpacing=0 cellPadding=0 width="100%">
+<TR><TD colspan=3 bgColor=#DDDDDD class=titleline>
+   <Table><tr>
+		<TD width=290>:: Taiwan Time ::</TD>
+</table></table>
+<div id="texttime" style="z-index:100;font-size:14px;background-color:#FFFFAA"></div>
+</div>
+<div class="sboxed" style="margin-top:1px;margin-bottom:1px">
+<TABLE cellSpacing=0 cellPadding=0 width="100%">
+<TR><TD colspan=3 bgColor=#DDDDDD class=titleline>
+   <Table><tr>
+		<TD width=290>:: Greece Time ::</TD>
+</table></table>
+<div id="texttime2" style="z-index:100;font-size:14px;background-color:#FFFFAA"></div>
+</div>
+
+<script type="text/javascript">
+var text_time = document.getElementById('texttime');
+var text_time2 = document.getElementById('texttime2');
+
+function currentTime(p)
+{
+	var localdate = new Date();
+	var localtime = localdate.getTime();
+	var localoffset = localdate.getTimezoneOffset()*60000;
+	var UTCtime = localtime + localoffset;
+ 	targettime = UTCtime + (3600000 * p);
+	c_time = new Date(targettime);
+    return c_time;	
+}
+
+var current_time = currentTime(roffset1);
+var current_time2 = currentTime(roffset2);
+
+refreshTime = function(){
+    current_time = currentTime(roffset1);
+	var dstr = current_time.toDateString();
+	var tstr = current_time.toTimeString();
+	dstr = dstr.replace(/Mon/i, "Monday,");
+	dstr = dstr.replace(/Tue/i, "Tuesday,");
+	dstr = dstr.replace(/Wed/i, "Wednesday,");
+	dstr = dstr.replace(/Thu/i, "Thursday,");
+	dstr = dstr.replace(/Fri/i, "Friday,");
+	dstr = dstr.replace(/Sat/i, "Saturday,");
+	dstr = dstr.replace(/Sun/i, "Sunday,");
+	var elems = tstr.split(" ");	
+    var tstr = elems[0];	
+
+    var  elems2 = tstr.split(":");
+    var  h = elems2[0];
+	if (h != 0) h = h.replace(/^0/,'');
+	var flag=0; 
+	var clr="blue";
+	if (h > 21 || h < 7) {clr="black";}
+	else if ((h >=9 && h<=17)) {clr="red";}
+	if (h > 12) {h = h - 12; flag=1;}
+	if (h == 12) {flag=1;}
+	if (flag == 0) tstr = h + ":" + elems2[1] + ":" + elems2[2] + " AM";
+	else if (flag == 1) tstr = h + ":" + elems2[1] + ":" + elems2[2] + " PM";
+	
+	var str = "<font style=\"font-size:17px;\"><table><tbody><tr height=5></tr>";
+	str += "<tr><td width=300 align=center><font color=black>" + dstr + "</font></td></tr><tr height=5></tr>";
+	str += "<tr><td width=300 align=center><font color=" + clr + " style=\"font-size:22px;\">" + tstr + "</font></td></tr></tbody></table>";
+	text_time.innerHTML = str;
+};
+
+flash = function(){
+	refreshTime();
+};
+
+refreshTime2 = function(){
+     current_time2 = currentTime(roffset2);
+	var dstr2 = current_time2.toDateString();
+	var tstr2 = current_time2.toTimeString();
+	dstr2 = dstr2.replace(/Mon/i, "Monday,");
+	dstr2 = dstr2.replace(/Tue/i, "Tuesday,");
+	dstr2 = dstr2.replace(/Wed/i, "Wednesday,");
+	dstr2 = dstr2.replace(/Thu/i, "Thursday,");
+	dstr2 = dstr2.replace(/Fri/i, "Friday,");
+	dstr2 = dstr2.replace(/Sat/i, "Saturday,");
+	dstr2 = dstr2.replace(/Sun/i, "Sunday,");
+	var elems = tstr2.split(" ");	
+    var tstr2 = elems[0];
+
+    var  elems2 = tstr2.split(":");
+    var  h = elems2[0];
+	if (h != 0) h = h.replace(/^0/,'');
+	var flag=0; 
+	var clr="blue";
+	if (h > 21 || h < 7) {clr="black";}
+	else if ((h >=9 && h<=17)) {clr="red";}
+	if (h > 12) {h = h - 12; flag=1;}
+	if (h == 12) {flag=1;}
+	if (flag == 0) tstr2 = h + ":" + elems2[1] + ":" + elems2[2] + " AM";
+	else if (flag == 1) tstr2 = h + ":" + elems2[1] + ":" + elems2[2] + " PM";
+	
+	var str2 = "<font style=\"font-size:17px;\"><table><tbody><tr height=5></tr>";
+	str2 += "<tr><td width=300 align=center><font color=black>" + dstr2 + "</font></td></tr><tr height=5></tr>";
+	str2 += "<tr><td width=300 align=center><font color=" + clr + " style=\"font-size:22px;\">" + tstr2 + "</font></td></tr></tbody></table>";
+	text_time2.innerHTML = str2;
+};
+
+flash2 = function(){
+	refreshTime2();
+};
+
+flash();
+flash2();
+
+window.setInterval(flash, 3000);
+window.setInterval(flash2, 3000);
+</script >
+<script language = "javascript" > 
+function isNum(args)
+{
+	args = args.toString();
+	if (args.length == 0) return false;
+	for (var i = 0;  i<args.length;  i++){
+		if ((args.substring(i,i+1) < "0" || args.substring(i, i+1) > "9") && args.substring(i, i+1) !=":"){return false;}
+	}
+	return true;
+}
+
+var rb1 = ""; var rb2 = "";
+function rbcheck(p)
+{
+   var a = document.rb.tbox1.value;
+   var b = document.rb.tbox2.value;
+   if (p == 1)
+   {
+	  if (a == rb1) return;
+	  document.getElementById('ct1').disabled = true;	
+      if (isNum(a))
+	  {
+		  a = a.substring(0,a.length-1);
+		  document.rb.tbox1.value = a;
+		  var n = document.getElementById('note');
+		  n.innerHTML = '<font color=red><B>Note:</b></font>&nbsp;Please use left drop boxes to convert times. This is for time converter search only. You may input time zone name, city, country etc, e.g. Eastern Standard Time, London Time, India Time';
+		  return;	   
+ 	  }
+	  rb1 = a;
+	  if (a.length < 2) 
+	  {
+	     document.getElementById('tbox1_suggest').innerHTML = '';
+	     return;
+	  }
+	  tboxSuggest1();
+   }
+   else if (p == 2)
+   {
+	  if (b == rb2) return;
+	  document.getElementById('ct2').disabled = true;	
+      if (isNum(b))
+	  {
+		  b = b.substring(0,b.length-1);
+		  document.rb.tbox2.value = b;
+		  var n = document.getElementById('note');
+		  n.innerHTML = '<font color=red><B>Note:</b></font>&nbsp;This is for time converter search only. You may input time zone name, city, country etc, e.g. Eastern Standard Time, London Time, India Time';
+		  return;	   
+	  }
+	  rb2 = b;
+	  if (b.length < 2)
+      {
+	      document.getElementById('tbox2_suggest').innerHTML = '';
+     	  return;
+	  }
+	  tboxSuggest2();
+   }   
+}
+
+function getcurrenttime(p)
+{
+var a = document.rb.tbox1.value;
+if (p == 2)
+a = document.rb.tbox2.value
+
+if (a == "Local Time") radfilename = "../index.php";
+else
+{
+	a = a.toLowerCase();
+	a = a.replace(/,.+$/,"");
+	a = a.replace(/\(.+\)/,"");
+	a = a.replace(/ Time/i,""); 
+	a = a.replace(/standard/,"");
+	a = a.replace(/\s/g,"");
+	a = a.replace(/\^/,"");
+	a = a.replace(/\//,"_");
+	a = a.replace(".","");
+	radfilename = "../timelocal/"+a+".php";
+}
+window.location.href=radfilename;
+}
+</script >
+
+</div></div>
+
+</body></html>
